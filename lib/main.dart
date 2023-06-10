@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'WhatsApp UI',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
