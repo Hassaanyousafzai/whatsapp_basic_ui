@@ -1,9 +1,5 @@
 # whatsapp_basic_ui
 
-A new Flutter project.
-
-## Getting Started
-
 This project is a basic implementation of a WhatsApp user interface using Flutter. It consists of a home page with three tabs: Chats, Status, and Calls.
 
 The Chats tab displays a list of chats with different contacts. Each chat item is represented by a ListTile widget, showing the contact's profile picture, name, last message, and the time of the last message.
