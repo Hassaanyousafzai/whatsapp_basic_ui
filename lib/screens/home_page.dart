@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_basic_ui/components/call_list_tile.dart';
+import 'package:whatsapp_basic_ui/components/chat_list_tile.dart';
+import 'package:whatsapp_basic_ui/components/comps.dart';
+import 'package:whatsapp_basic_ui/components/status_list_tile.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final userData data = userData();
 
   @override
   Widget build(BuildContext context) {
@@ -9,11 +20,10 @@ class HomePage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           actions: [
             const Icon(Icons.search),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
             PopupMenuButton(
               icon: const Icon(Icons.more_vert_outlined),
               itemBuilder: (context) => const [
@@ -28,9 +38,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
           ],
           centerTitle: false,
           title: const Text('WhatsApp'),
@@ -52,51 +60,38 @@ class HomePage extends StatelessWidget {
           children: [
             // Chats
             ListView.builder(
+              itemCount: data.chatData.length * 10,
               itemBuilder: (context, index) {
-                return const ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/Joey.jfif'),
-                  ),
-                  title: Text('Joey Tribbiani'),
-                  subtitle: Text("Hey How you doin'?"),
-                  trailing: Text('6:00 PM'),
+                final dataIndex = index % data.chatData.length;
+                return ChatListTileWidget(
+                  img: data.images[index % data.images.length],
+                  name: data.chatData[dataIndex][0],
+                  text: data.chatData[dataIndex][1],
+                  time: data.chatData[dataIndex][2],
                 );
               },
             ),
             // Status
             ListView.builder(
+              itemCount: data.chatData.length * 10,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.green,
-                        width: 3,
-                      ),
-                    ),
-                    child: const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/Joey1.jfif'),
-                    ),
-                  ),
-                  title: const Text('Joey Tribbiani'),
-                  subtitle: const Text('Few Minutes Ago'),
-                );
+                final dataIndex = index % data.images.length;
+                return StatusListTileWidget(
+                    img: data.images[index % data.images.length],
+                    name: data.chatData[dataIndex][0],
+                    time: data.chatData[dataIndex][2]);
               },
             ),
             // Calls
             ListView.builder(
+              itemCount: data.chatData.length * 10,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/Joey2.jfif'),
-                  ),
-                  title: const Text('Joey Tribbiani'),
-                  subtitle: const Text("You missed a call"),
-                  trailing: (index % 2 == 0)
-                      ? const Icon(Icons.phone)
-                      : const Icon(Icons.video_call),
-                );
+                final dataIndex = index % data.images.length;
+                return CallListTileWidget(
+                    img: data.images[index % data.images.length],
+                    name: data.chatData[dataIndex][0],
+                    text: data.chatData[dataIndex][1],
+                    num: index);
               },
             )
           ],
