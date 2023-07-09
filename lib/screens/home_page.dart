@@ -90,7 +90,6 @@ class _HomePageState extends State<HomePage> {
                 return CallListTileWidget(
                     img: data.images[index % data.images.length],
                     name: data.chatData[dataIndex][0],
-                    text: data.chatData[dataIndex][1],
                     num: index);
               },
             )

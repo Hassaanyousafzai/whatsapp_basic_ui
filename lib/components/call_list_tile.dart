@@ -5,12 +5,11 @@ class CallListTileWidget extends StatelessWidget {
     super.key,
     required this.img,
     required this.name,
-    required this.text,
     required this.num,
   });
 
   final ImageProvider img;
-  final String name, text;
+  final String name;
   final int num;
 
   @override
@@ -20,7 +19,9 @@ class CallListTileWidget extends StatelessWidget {
         backgroundImage: img,
       ),
       title: Text(name),
-      subtitle: Text(text),
+      subtitle: (num % 2 == 0)
+          ? const Text("Missed a voice call")
+          : const Text("Missed a video call"),
       trailing: (num % 2 == 0)
           ? const Icon(Icons.phone)
           : const Icon(Icons.video_call),
